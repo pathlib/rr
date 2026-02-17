@@ -252,54 +252,58 @@ def sauvegarder_csv(liste):
 
 # Menu principal
 while True:
-    delterm()
-    print("======== Menu Principal ========\n")
-    a=input("/1 Enregistre votre question\n/2 Afficher le reacap\n/3 Enregistre votre progression\n\nChosisez une option a effectuer : (1/2/3)")
-    if a == "1":
-        question()
-        z=input("fin/supr/bool/libre : ")
-        if z == "fin":
-            reponse()
+    try :
+        delterm()
+        print("======== Menu Principal ========\n")
+        a=input("/1 Enregistre votre question\n/2 Afficher le reacap\n/3 Enregistre votre progression\n\nChosisez une option a effectuer : (1/2/3)")
+        if a == "1":
+            question()
+            z=input("fin/supr/bool/libre : ")
+            if z == "fin":
+                reponse()
 
-            
-        elif z == "supr":
-           suppresion()
-        elif z == "bool":
-           repbool()
-        elif z == "libre":
-            libre()
-    
-    elif a =="2":
-         rep()
-    
-    
-    elif a =="3":
-        print("Choisissez votre mode de sauvegarde : 1.txt, 2.json, 3.charger_json, 4.CSV, 5.DB")
-        sauvegarde=input("Votre choix (1-5) : ")
-        if sauvegarde == "1" :
-            print("fichier sauvegarder en .txt")
-            txt()
-            input("Appuyez sur Entrée pour continuer...")
-        elif sauvegarde == "2":
-            print("fichier sauvegarder en .json")
-            sauvegarder_json(liste)
-        elif sauvegarde == "3":
-            liste=charger_json()
-        elif sauvegarde == "4":
-            sauvegarder_csv(liste)
-        elif sauvegarde == "5":
-            if not liste:
-                print("Attention : La liste est vide. Ajoutez des questions (Menu 1) avant de sauvegarder.")
-            else:
-                create_db()
-                ajouter_utilisateurs(liste)
-                print(f"{len(liste)} données sauvegardées en base de données.")
+                
+            elif z == "supr":
+               suppresion()
+            elif z == "bool":
+               repbool()
+            elif z == "libre":
+                libre()
+        
+        elif a =="2":
+             rep()
+        
+        
+        elif a =="3":
+            print("Choisissez votre mode de sauvegarde : 1.txt, 2.json, 3.charger_json, 4.CSV, 5.DB")
+            sauvegarde=input("Votre choix (1-5) : ")
+            if sauvegarde == "1" :
+                print("fichier sauvegarder en .txt")
+                txt()
+                input("Appuyez sur Entrée pour continuer...")
+            elif sauvegarde == "2":
+                print("fichier sauvegarder en .json")
+                sauvegarder_json(liste)
+            elif sauvegarde == "3":
+                liste=charger_json()
+            elif sauvegarde == "4":
+                sauvegarder_csv(liste)
+            elif sauvegarde == "5":
+                if not liste:
+                    print("Attention : La liste est vide. Ajoutez des questions (Menu 1) avant de sauvegarder.")
+                else:
+                    create_db()
+                    ajouter_utilisateurs(liste)
+                    print(f"{len(liste)} données sauvegardées en base de données.")
 
-            tt=input("Tapez 'affiche' pour voir, 'suppr' pour supprimer l'ID 1, ou Entrée pour quitter : ")
-            if tt == "affiche":
-                afficher_utilisateurs()
-                input("Appuyez sur Entrée pour continuer...")
-            if tt == "suppr":
-                supprimer_utilisateur(1)
-                afficher_utilisateurs()
-                input("Appuyez sur Entrée pour continuer...")
+                tt=input("Tapez 'affiche' pour voir, 'suppr' pour supprimer l'ID 1, ou Entrée pour quitter : ")
+                if tt == "affiche":
+                    afficher_utilisateurs()
+                    input("Appuyez sur Entrée pour continuer...")
+                if tt == "suppr":
+                    supprimer_utilisateur(1)
+                    afficher_utilisateurs()
+                    input("Appuyez sur Entrée pour continuer...")
+    except KeyboardInterrupt:
+        print("\nFermeture du programme...")
+        break
