@@ -254,7 +254,7 @@ def sauvegarder_csv(liste):
 while True:
     delterm()
     print("======== Menu Principal ========\n")
-    a=input("1 enregistre votre question\n/2 afficher le reacap\n/3 enregistre votre progression: ")
+    a=input("/1 Enregistre votre question\n/2 Afficher le reacap\n/3 Enregistre votre progression: ")
     if a == "1":
         question()
         z=input("fin/supr/bool/libre : ")
