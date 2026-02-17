@@ -1,7 +1,9 @@
 import sqlite3
+import os
 
-
-DB_PATH = 'ma_base.db'
+# Chemin absolu pour garantir que la DB est créée au bon endroit (dans le même dossier que ce script)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.path.join(BASE_DIR, 'ma_base.db')
 
 # Fonction pour créer la base de données'
 
