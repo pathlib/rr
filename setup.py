@@ -5,7 +5,12 @@ import csv
 import os
 import time
 import platform
-import sqlite3
+from db_manager import (
+    create_db,
+    ajouter_utilisateurs,
+    afficher_utilisateurs,
+    supprimer_utilisateur)
+
 
 
 liste = []
@@ -104,74 +109,6 @@ def libre():
     libres = input("Votre commentaire : ")
     h = int(input("Numéro de la question : "))
     liste[h]["commentaire"] = libres
-
-
-# Création de la base de données SQLite
-def create_db():
-    conn = sqlite3.connect('ma_base.db')  # Utilisation d'une seule base de données
-    c = conn.cursor()
-
-    # Création de la table si elle n'existe pas déjà
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS utilisateurs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            question TEXT NOT NULL,
-            reponse TEXT,
-            type TEXT,
-            commentaire TEXT,
-            date TEXT
-        )
-    ''')
-
-    # Sauvegarde des modifications
-    conn.commit()
-    conn.close()
-
-
-# Fonction pour ajouter plusieurs entrées à la base de données à partir d'une liste de dictionnaires
-def ajouter_utilisateurs(liste):
-    conn = sqlite3.connect('ma_base.db')  # Utilisation de la même base de données
-    c = conn.cursor()
-
-    # Insertion de chaque entrée dans la base de données
-    for utilisateur in liste:
-        c.execute('''
-            INSERT INTO utilisateurs (question, reponse, type, commentaire, date)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (utilisateur["question"], utilisateur["reponse"], utilisateur["type"], utilisateur["commentaire"], utilisateur["date"]))
-
-    # Sauvegarde des modifications
-    conn.commit()
-    conn.close()
-
-
-# Fonction pour afficher tous les utilisateurs (questions dans la base de données)
-def afficher_utilisateurs():
-    conn = sqlite3.connect('ma_base.db')  # Connexion à la bonne base de données
-    c = conn.cursor()
-
-    # Sélectionner toutes les questions
-    c.execute('SELECT * FROM utilisateurs')
-    utilisateurs = c.fetchall()
-
-    # Affichage des utilisateurs
-    for utilisateur in utilisateurs:
-        print(f"ID: {utilisateur[0]}, Question: {utilisateur[1]}, Réponse: {utilisateur[2]}, Type: {utilisateur[3]}, Commentaire: {utilisateur[4]}, Date: {utilisateur[5]}")
-
-    conn.close()
-
-
-# Fonction pour supprimer une question de la base de données par ID
-def supprimer_utilisateur(id_utilisateur):
-    conn = sqlite3.connect('ma_base.db')  # Connexion à la bonne base de données
-    c = conn.cursor()
-
-    # Suppression de la question par ID
-    c.execute('DELETE FROM utilisateurs WHERE id = ?', (id_utilisateur,))
-
-    # Sauvegarde des modifications
-    conn.commit()
-    conn.close()
 
 
 
@@ -355,4 +292,3 @@ while True:
             if tt == "suppr":
                 supprimer_utilisateur(1)
                 afficher_utilisateurs()
-
