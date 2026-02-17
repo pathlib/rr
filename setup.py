@@ -288,9 +288,13 @@ while True:
         elif sauvegarde == "4":
             sauvegarder_csv(liste)
         elif sauvegarde == "5":
-            create_db()
-            ajouter_utilisateurs(liste)
-            print("Données sauvegardées en base de données.")
+            if not liste:
+                print("Attention : La liste est vide. Ajoutez des questions (Menu 1) avant de sauvegarder.")
+            else:
+                create_db()
+                ajouter_utilisateurs(liste)
+                print(f"{len(liste)} données sauvegardées en base de données.")
+
             tt=input("Tapez 'affiche' pour voir, 'suppr' pour supprimer l'ID 1, ou Entrée pour quitter : ")
             if tt == "affiche":
                 afficher_utilisateurs()
