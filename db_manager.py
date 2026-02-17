@@ -10,7 +10,7 @@ def create_db():
     # Création de la table si elle n'existe pas déjà
     c.execute('''
         CREATE TABLE IF NOT EXISTS utilisateurs (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY,
             question TEXT NOT NULL,
             reponse TEXT,
             type TEXT,
