@@ -49,7 +49,7 @@ def question():
 # Fonction pour supprimer une question de la liste
 def suppresion():
     print("Suppression")
-    h = int(input("Numéro de la question : "))
+    h = int(input("Numéro de la question : ")) - 1
     print(liste[h]['question'])
     try:
         del liste[h]
@@ -63,7 +63,7 @@ def suppresion():
 # Fonction pour ajouter une réponse à une question
 def reponse():
     try:
-        h = int(input("Numéro de la question : "))
+        h = int(input("Numéro de la question : ")) - 1
         print(liste[h]["question"])
         yu = input("Réponse : ")
         liste[h]["reponse"] = yu
@@ -77,7 +77,7 @@ def reponse():
 # Fonction pour saisir une valeur booléenne
 def repbool():
     try:
-        h = int(input("Numéro de la question : "))
+        h = int(input("Numéro de la question : ")) - 1
         print(liste[h]["question"])
         valeur = input("Valeur booléenne (True/False) : ")
         if valeur == "True" or valeur == "False":
@@ -100,9 +100,9 @@ def rep():
         print("Aucune donnée")
         input("Appuyez sur Entrée pour continuer...")
     else:
-        print(f"{'Question':<20} {'Réponse':<10} {'Type':<10} {'Commentaire':<20} {'Date':<10}")
-        for ligne in liste:
-            print(f"{ligne['question']:<20} {ligne['reponse']:<10} {ligne['type']:<10} {ligne['commentaire']:<20} {ligne['date']:<10}")
+        print(f"{'N°':<5} {'Question':<20} {'Réponse':<10} {'Type':<10} {'Commentaire':<20} {'Date':<10}")
+        for i, ligne in enumerate(liste, 1):
+            print(f"{i:<5} {ligne['question']:<20} {ligne['reponse']:<10} {ligne['type']:<10} {ligne['commentaire']:<20} {ligne['date']:<10}")
         
         input("Appuyez sur Entrée pour continuer...")
 
@@ -110,7 +110,7 @@ def rep():
 # Fonction pour ajouter un commentaire à une question
 def libre():
     libres = input("Votre commentaire : ")
-    h = int(input("Numéro de la question : "))
+    h = int(input("Numéro de la question : ")) - 1
     liste[h]["commentaire"] = libres
 
 
