@@ -296,7 +296,7 @@ while True:
                     ajouter_utilisateurs(liste)
                     print(f"{len(liste)} données sauvegardées en base de données.")
 
-                tt=input("Tapez 'affiche' pour voir, 'suppr' pour supprimer l'ID 1, ou Entrée pour quitter : ")
+                tt=input("Tapez 'affiche' pour voir, 'suppr' pour supprimer l'ID 1, ou Entrée pour quitter : ").strip().lower()
                 if tt == "affiche":
                     afficher_utilisateurs()
                     input("Appuyez sur Entrée pour continuer...")

@@ -54,9 +54,12 @@ def afficher_utilisateurs():
     c.execute('SELECT * FROM utilisateurs')
     utilisateurs = c.fetchall()
 
-    # Affichage des utilisateurs
-    for utilisateur in utilisateurs:
-        print(f"ID: {utilisateur[0]}, Question: {utilisateur[1]}, Réponse: {utilisateur[2]}, Type: {utilisateur[3]}, Commentaire: {utilisateur[4]}, Date: {utilisateur[5]}")
+    if not utilisateurs:
+        print("Aucune donnée trouvée dans la base de données.")
+    else:
+        # Affichage des utilisateurs
+        for utilisateur in utilisateurs:
+            print(f"ID: {utilisateur[0]}, Question: {utilisateur[1]}, Réponse: {utilisateur[2]}, Type: {utilisateur[3]}, Commentaire: {utilisateur[4]}, Date: {utilisateur[5]}")
 
     conn.close()
 
