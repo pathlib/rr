@@ -1,1 +1,20 @@
 import torch
+
+# données
+x = torch.tensor([1.0, 2.0, 3.0])
+y = torch.tensor([2.0, 4.0, 6.0])
+
+# paramètre à apprendre
+w = torch.tensor(0.0, requires_grad=True)
+
+# entraînement
+for _ in range(100):
+    y_pred = w * x              # prédiction
+    loss = ((y_pred - y)**2).mean()  # erreur
+    loss.backward()            # calcul du gradient
+
+    with torch.no_grad():
+        w -= 0.01 * w.grad     # mise à jour
+        w.grad.zero_()         # reset gradient
+
+print(w)  # ≈ 2
